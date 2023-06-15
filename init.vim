@@ -39,31 +39,24 @@ call plug#begin()
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'romgrk/barbar.nvim'
     Plug 'joshdick/onedark.vim'
+    Plug 'jayli/vim-easycomplete'
+    Plug 'SirVer/ultisnips'
+    " " autocomplete
+    " Plug 'neovim/nvim-lspconfig'
+    " Plug 'hrsh7th/cmp-nvim-lsp'
+    " Plug 'hrsh7th/cmp-buffer'
+    " Plug 'hrsh7th/cmp-path'
+    " Plug 'hrsh7th/cmp-cmdline'
+    " Plug 'hrsh7th/nvim-cmp'
+    " " Snip
+    " Plug 'hrsh7th/cmp-vsnip'
+    " Plug 'hrsh7th/vim-vsnip'
 call plug#end()
 
 lua require('lualine-config')
 lua require('wilder-config')
-lua << EOF
-    require('dashboard').setup({
-        theme = 'hyper',
-    config = {
-      shortcut = {
-        { desc = '󰊳 Update', group = '@property', action = 'PlugUpdate', key = 'u' },
-        {
-          icon = ' ',
-          icon_hl = '@variable',
-          desc = 'Files',
-          group = 'Label',
-          action = 'Telescope find_files',
-          key = 'f',
-        },
-      },
-      packages = { enable = true },
-      project = { enable = false },
-      footer = {},
-    },
-    })
-EOF
+lua require('dashboard-config')
+" lua require('cmp-config')
 lua require('nvim-tree').setup()
 
 colorscheme tokyonight
