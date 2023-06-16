@@ -1,34 +1,50 @@
-" Custom
-    nnoremap <leader>sv :source $MYVIMRC<CR>
-    nnoremap <leader>pi :PlugInstall<CR>
-    nnoremap <leader>dd :Dashboard<CR>
-    nnoremap <leader>nt :NvimTreeToggle<CR>
-    nnoremap <leader>in :e ~/.config/nvim/init.vim<CR>
-    nnoremap <leader>cd :cd ~/.config/nvim/<CR>
-    nnoremap <space> za
-    tnoremap <Esc> <C-\><C-n>
-    nnoremap y "+y
-    vnoremap y "+y
-    nnoremap p "+p
-    vnoremap p "+p
-    nnoremap x "+x
-    vnoremap x "+x
-    nnoremap YY ggVGy
-" Telescope
-    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
-    nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-    nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-    nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-" Buffers
-    nnoremap <silent>    <A-,> :BufferPrevious<CR>
-    nnoremap <silent>    <A-.> :BufferNext<CR>
-    nnoremap <silent>    <A-c> :BufferClose<CR>
-    nnoremap <silent>    <C-s> :BufferPick<CR>
-    nnoremap <silent>    <C-t> :tabe<CR>
+" Key Remaps
+    " Function shortcuts
+	nnoremap <leader>sv <cmd>source $MYVIMRC<CR>
+	nnoremap <leader>pi <cmd>PlugInstall<CR>
+	nnoremap <leader>dd <cmd>Dashboard<CR>
+	nnoremap <leader>in <cmd>e ~/.config/nvim/init.vim<CR>
+	nnoremap <leader>cd <cmd>cd ~/.config/nvim/<CR>
+	" Trees
+	nnoremap <silent> <A-q> <cmd>NvimTreeToggle<CR>
+	nnoremap <silent> <A-u> <cmd>UndotreeToggle<CR>
+	" Hop
+	nnoremap <silent> <S-f> <cmd>HopWord<CR>
+	vnoremap <silent> <S-f> <cmd>HopWord<CR>
+	" Telescope
+	nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
+	nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+	nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+	nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+	" Buffers
+	nnoremap <silent> <A-,> <cmd>BufferPrevious<CR>
+	nnoremap <silent> <A-.> <cmd>BufferNext<CR>
+	nnoremap <silent> <A-c> <cmd>BufferClose<CR>
+	nnoremap <silent> <C-s> <cmd>BufferPick<CR>
+	nnoremap <silent> <C-t> <cmd>tabe<CR>
+    " Fold
+	nnoremap <space> za
+    " Terminal escape
+	tnoremap <Esc> <C-\><C-n>
+    " Split nav
+	nnoremap <C-J> <C-W><C-J>
+	nnoremap <C-K> <C-W><C-K>
+	nnoremap <C-L> <C-W><C-L>
+	nnoremap <C-H> <C-W><C-H>
+    " Clipboard
+	nnoremap y "+y
+	vnoremap y "+y
+	nnoremap p "+p
+	vnoremap p "+p
+	nnoremap x "+x
+	vnoremap x "+x
+	nnoremap d "+d
+	vnoremap d "+d
+	nnoremap YY ggVGy
 
 lua require('init')
-
-call plug#begin()
+" Plugins
+    call plug#begin()
     " Unsorted
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'glepnir/dashboard-nvim'
@@ -58,7 +74,8 @@ call plug#begin()
 	Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
 	Plug 'sainnhe/edge'
 	Plug 'rebelot/kanagawa.nvim'
-call plug#end()
+	Plug 'rose-pine/neovim'
+    call plug#end()
 
 " Configs
     lua require('lualine-config')
@@ -67,16 +84,30 @@ call plug#end()
     lua require('nvim-tree-config')
     lua require('hop-config')
 " Misc
+    set undofile
     colorscheme tokyonight
     set nowrap
     set shiftwidth=4 smarttab
-    set foldcolumn=2
     set ignorecase
     set smartcase
+    " Folding
+    set foldcolumn=2
     autocmd FileType vim setlocal foldmethod=indent
+    set fillchars+=fold:\ 
+    highlight Folded guibg=NONE
+    " Save/Load folds automatically
     autocmd BufWinLeave *.* mkview
     autocmd BufWinEnter *.* silent loadview    
+    " Terminal auto-insert on buffer start (doesn't work)
     autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
 " Functions
     " Print the result of the input arg to a new tab
     function PrintToReg(arg)
@@ -87,4 +118,5 @@ call plug#end()
 	put =var
     endfunction
     command! -nargs=+ -complete=command PrintToReg call PrintToReg(<q-args>)
+
 
