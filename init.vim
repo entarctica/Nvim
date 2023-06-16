@@ -7,8 +7,15 @@
     nnoremap <leader>cd :cd ~/.config/nvim/<CR>
     nnoremap <space> za
     tnoremap <Esc> <C-\><C-n>
+    nnoremap y "+y
+    vnoremap y "+y
+    nnoremap p "+p
+    vnoremap p "+p
+    nnoremap x "+x
+    vnoremap x "+x
+    nnoremap YY ggVGy
 " Telescope
-    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
@@ -18,7 +25,6 @@
     nnoremap <silent>    <A-c> :BufferClose<CR>
     nnoremap <silent>    <C-s> :BufferPick<CR>
     nnoremap <silent>    <C-t> :tabe<CR>
-    nnoremap <silent>    <-t> :Hop*CurrentLineAC<CR>
 
 lua require('init')
 
@@ -64,6 +70,21 @@ call plug#end()
     colorscheme tokyonight
     set nowrap
     set shiftwidth=4 smarttab
-    autocmd FileType vim setlocal foldmethod=indent
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
     set foldcolumn=2
+    set ignorecase
+    set smartcase
+    autocmd FileType vim setlocal foldmethod=indent
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview    
+    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" Functions
+    " Print the result of the input arg to a new tab
+    function PrintToReg(arg)
+	redir => var
+	silent execute a:arg
+	redir END
+	tabe
+	put =var
+    endfunction
+    command! -nargs=+ -complete=command PrintToReg call PrintToReg(<q-args>)
+
