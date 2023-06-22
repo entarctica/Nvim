@@ -3,7 +3,6 @@ vim.opt.termguicolors = true
 
 -- OR setup with some options
 require("nvim-tree").setup({
-    disable_netrw = true,
     sync_root_with_cwd = true,
     sort_by = "case_sensitive",
     view = {

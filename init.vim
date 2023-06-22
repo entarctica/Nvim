@@ -62,6 +62,7 @@ lua require('init')
 	Plug 'jayli/vim-easycomplete'
 	Plug 'SirVer/ultisnips'
 	Plug 'kassio/neoterm'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Navigation
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
@@ -98,8 +99,6 @@ lua require('init')
     " Save/Load folds automatically
     autocmd BufWinLeave *.* mkview
     autocmd BufWinEnter *.* silent loadview    
-    " Terminal auto-insert on buffer start (doesn't work)
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " Functions
     " Print the result of the input arg to a new tab
     function PrintToReg(arg)
