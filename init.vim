@@ -60,9 +60,10 @@ lua require('init')
 	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'romgrk/barbar.nvim'
 	Plug 'jayli/vim-easycomplete'
-	Plug 'SirVer/ultisnips'
+	Plug 'SirVer/ultisnips'	
 	Plug 'kassio/neoterm'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'github/copilot.vim'
     " Navigation
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
