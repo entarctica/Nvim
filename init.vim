@@ -1,3 +1,4 @@
+set clipboard+=unnamedplus
 " Key Remaps
     " Function shortcuts
 	nnoremap <leader>sv <cmd>source $MYVIMRC<CR>
@@ -32,15 +33,15 @@
 	nnoremap <C-L> <C-W><C-L>
 	nnoremap <C-H> <C-W><C-H>
     " Clipboard
-	nnoremap y "+y
-	vnoremap y "+y
-	nnoremap p "+p
-	vnoremap p "+p
-	nnoremap x "+x
-	vnoremap x "+x
-	nnoremap d "+d
-	vnoremap d "+d
-	nnoremap YY ggVGy
+	" nnoremap y "+y
+	" vnoremap y "+y
+	" nnoremap p "+p
+	" vnoremap p "+p
+	" nnoremap x "+x
+	" vnoremap x "+x
+	" nnoremap d "+d
+	" vnoremap d "+d
+	" nnoremap YY ggVGy
 
 lua require('init')
 " Plugins
@@ -59,7 +60,7 @@ lua require('init')
 	Plug 'tpope/vim-commentary'
 	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'romgrk/barbar.nvim'
-	Plug 'jayli/vim-easycomplete'
+	" Plug 'jayli/vim-easycomplete'
 	Plug 'SirVer/ultisnips'	
 	Plug 'kassio/neoterm'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
